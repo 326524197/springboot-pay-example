@@ -9,6 +9,7 @@ import com.example.pay.configuration.AlipayProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -49,20 +50,20 @@ public class AlipayWAPPayController {
      * @param response
      * @throws Exception
      */
-    @PostMapping("/gotoPayPage")
+    @GetMapping("/gotoPayPage")
     public void gotoPayPage(HttpServletResponse response) throws AlipayApiException, IOException {
         // 订单模型
         String productCode="QUICK_WAP_WAY";
         AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
         model.setOutTradeNo(UUID.randomUUID().toString());
-        model.setSubject("支付测试");
-        model.setTotalAmount("0.01");
-        model.setBody("支付测试，共0.01元");
+        model.setSubject("手机支付测试");
+        model.setTotalAmount("3");
+        model.setBody("手机支付测试，共3元");
         model.setTimeoutExpress("5m");
         model.setProductCode(productCode);
 
         AlipayTradeWapPayRequest wapPayRequest =new AlipayTradeWapPayRequest();
-        wapPayRequest.setReturnUrl("http://yxep7y.natappfree.cc/alipay/wap/returnUrl");
+        wapPayRequest.setReturnUrl("http://hjdiu6.natappfree.cc/alipay/wap/returnUrl");
         wapPayRequest.setNotifyUrl(alipayProperties.getNotifyUrl());
         wapPayRequest.setBizModel(model);
 

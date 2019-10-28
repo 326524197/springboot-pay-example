@@ -7,6 +7,7 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.example.pay.configuration.AlipayProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,19 +40,20 @@ public class AlipayPagePayController {
     private AlipayController alipayController;
 
 
-    @PostMapping("/gotoPayPage")
+    @GetMapping("/gotoPayPage")
     public void gotoPayPage(HttpServletResponse response) throws AlipayApiException, IOException {
         // 订单模型
         String productCode = "FAST_INSTANT_TRADE_PAY";
         AlipayTradePagePayModel model = new AlipayTradePagePayModel();
         model.setOutTradeNo(UUID.randomUUID().toString());
-        model.setSubject("支付测试");
-        model.setTotalAmount("0.01");
-        model.setBody("支付测试，共0.01元");
+        model.setSubject("网页支付测试2019-10-25");
+        model.setTotalAmount("3.5");
+        model.setBody("网页支付测试，共3.5元");
         model.setProductCode(productCode);
 
         AlipayTradePagePayRequest pagePayRequest =new AlipayTradePagePayRequest();
-        pagePayRequest.setReturnUrl("http://s9v2cw.natappfree.cc/alipay/page/returnUrl");
+//        pagePayRequest.setReturnUrl("http://s9v2cw.natappfree.cc/alipay/page/returnUrl");
+        pagePayRequest.setReturnUrl("http://hjdiu6.natappfree.cc/alipay/page/returnUrl");
         pagePayRequest.setNotifyUrl(alipayProperties.getNotifyUrl());
         pagePayRequest.setBizModel(model);
 
